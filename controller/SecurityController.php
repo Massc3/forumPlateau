@@ -16,15 +16,35 @@ class SecurityController extends AbstractController implements ControllerInterfa
     public function index()
 
     {
-        $user = Session::getUser()();
-        return [
+        // return [
 
-            "view" => VIEW_DIR . "error404.php",
+        //     "view" => VIEW_DIR . "error404.php"
+        // ];
+    }
+    public function listUsers()
+    {
+        $manager = new UserManager();
+        $users = $manager->findAll();
+
+        return [
+            "view" => VIEW_DIR . "view/listUsers.php",
+            "data" => ["users" => $users]
+        ];
+    }
+
+    public function userProfil($id)
+    {
+        $userManager = new UserManager();
+        $user = $userManager->findOneById($id);
+
+        return [
+            "view" => VIEW_DIR . "security/userProfil.php",
             "data" => [
                 "user" => $user
             ]
         ];
     }
+
 
     public function registerForm()
     {
@@ -256,37 +276,69 @@ class SecurityController extends AbstractController implements ControllerInterfa
                 $this->redirectTo('forum', 'listCategories');
             }
         }
+    }
+    // fonction pour mettre à jour un mot de passe 
+    public function updatePasswordForm($id)
+    {
+        $userManager = new userManager();
+
+        $user = $userManager->findOneById($id);
+        $password = "password";
+
+        return [
+            "view" => VIEW_DIR . "forum/updatePasswordForm.php",
+            "data" => [
+                "user" => $user,
+                "password" => $password,
+            ]
+        ];
+    }
 
 
+    // Récupérer le mot de passe haché de l'utilisateur depuis la base de données
 
-        // Récupérer le mot de passe haché de l'utilisateur depuis la base de données
+    // public function updatePasswordForm($id)
+    // {
+    //     return [
 
+    //         "view" => VIEW_DIR . "security/updatePasswordForm.php",
 
+    //         "data" => [
 
+    //             "successMessage" => Session::getFlash('success'),
 
+    //             "errorMessage" => Session::getFlash('error')
+
+    //         ]
+
+    //     ];
+    // }
+    public function updatePassword()
+    {
+        $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $hash = filter_input(INPUT_POST, "hash", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $newPassword = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $confirmPassword = filter_input(INPUT_POST, "confirmPassword", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         // On vérifie que le pseudo et le mot de passe correspondent à la BDD sinon il faudra indiquer qu'il y a une erreur de pseudo ou de mot de passe.
 
-        // if (password_verify($password, $hash)) {
+        if (password_verify($password, $hash)) {
 
 
 
-        //     Session::addFlash('success', 'Le mot de passe est valide !');
+            Session::addFlash('success', 'Le mot de passe est valide !');
 
-        //     $this->redirectTo('view', 'home');
-
-
-
-        // } else {
+            $this->redirectTo('view', 'home');
+        } else {
 
 
 
-        //     Session::addFlash('error', 'Nom d\'utilisateur ou mot de passe incorrect.');
+            Session::addFlash('error', 'Nom d\'utilisateur ou mot de passe incorrect.');
 
-        //     $this->redirectTo('view', 'layout');
-
-        // }
+            $this->redirectTo('view', 'layout');
+        }
     }
+
     /**
  
      * LOG OUT

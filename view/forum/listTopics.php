@@ -18,8 +18,8 @@ $category = $result['data']['category'];
             <!-- afficher le titre du Topic -->
             <div class="list-topic-addTopic">
                 <p class="list-topic"><a href="index.php?ctrl=forum&action=findPostByTopicId&id=<?= $topic->getId() ?>"><?= $topic->getTitle() ?></a></p>
-                <a href="index.php?ctrl=forum&action=updateTopicForm&id=<?= $topic->getId() ?>&categoryId=<?= $category->getId() ?>">Update Topic</a>
-                <a href="index.php?ctrl=forum&action=deleteTopic">delete Topic</a>
+                <a href="index.php?ctrl=forum&action=updateTopicForm&id=<?= $topic->getId() ?>&categoryId=<?= $category->getId() ?>">Update</a>
+                <a href="index.php?ctrl=forum&action=deleteTopic&id=<?= $topic->getId() ?>&categoryId=<?= $category->getId() ?>">delete</a>
             </div>
     <?php
         }

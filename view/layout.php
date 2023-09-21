@@ -25,14 +25,13 @@
                 <nav id="nav-page">
                     <div id="nav-en-tete">
                         <div id="nav-left">
-                            <a href="index.php?ctrl=home&action=layout">Accueil</a>
+                            <a href="index.php?ctrl=home&action=">Accueil</a>
                             <?php
-                            // if (App\Session::isAdmin()) {
+                            if (App\Session::isAdmin()) {
                             ?>
-                            <a href="index.php?ctrl=home&action=users" rel='nofollow'>Voir la liste des utilisateurs</a>
-
+                                <a href="index.php?ctrl=security&action=listUsers">User List</a>
                             <?php
-                            // }
+                            }
                             ?>
                         </div>
                         <div class="nav-bar-connexion">
@@ -45,27 +44,24 @@
                             <img src="./public/img/basket 1.jpg" alt="photo de plusieurs jeunes sur un terrain exterieur">
                         </figure>
                     </div>
-                    <div id="nav-right">
+                    <div class="header-nav-right">
                         <?php
 
                         if (App\Session::getUser()) {
                         ?>
-                            <a href="index.php?ctrl=security&action=viewProfile"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser() ?></a>
+                            <a href="index.php?ctrl=forum&action=listCategories">Categories List</a>
+                            <a href="index.php?ctrl=security&action=userProfil&id=<?= App\Session::getUser()->getId() ?>"><span class="fas fa-user"></span>&nbsp;</a>
                             <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
                         <?php
                         } else {
                         ?>
                             <!-- <a href="index.php?ctrl=forum&action=listTopics">la liste des topics</a> -->
-                            <div id="header">
-                                <div class="header-nav-bar">
-                                    <a href="index.php?ctrl=forum&action=listCategories">Categories List</a>
-                                    <a href="index.php?ctrl=home&action=listUsers">User List</a>
-                                </div>
+                            <div class="header-category-user">
+                                <a href="index.php?ctrl=forum&action=listCategories">Categories List</a>
+
                             </div>
                         <?php
                         }
-
-
                         ?>
                     </div>
                 </nav>

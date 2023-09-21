@@ -18,22 +18,11 @@ class HomeController extends AbstractController implements ControllerInterface
 
 
         return [
-            "view" => VIEW_DIR . "security/test.php",
+            "view" => VIEW_DIR . "security/home.php",
             "data" => [
                 "title" => "Acceuil",
                 "description" => "forum sur le sport"
             ]
-        ];
-    }
-
-    public function listUsers()
-    {
-        $manager = new UserManager();
-        $users = $manager->findAll();
-
-        return [
-            "view" => VIEW_DIR . "security/listUsers.php",
-            "data" => ["users" => $users]
         ];
     }
 
@@ -51,4 +40,6 @@ class HomeController extends AbstractController implements ControllerInterface
             $nb++;
             include(VIEW_DIR."ajax.php");
         }*/
+
+    // faire la public function home
 }

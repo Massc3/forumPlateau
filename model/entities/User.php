@@ -15,8 +15,6 @@ final class User extends Entity
     private $dateInscription;
     private $ban;
     private $role;
-    private $userRole;
-
 
     public function __construct($data)
     {
@@ -141,27 +139,8 @@ final class User extends Entity
     }
 
     /**
+
      * Get the value of role
-     */
-    public function getRole()
-    {
-        return $this->role;
-    }
-
-    /**
-     * Set the value of role
-     *
-     * @return  self
-     */
-    public function setRole($role)
-    {
-        $this->role = $role;
-
-        return $this;
-    }
-    /**
-
-     * Get the value of userRole
 
      */
 
@@ -169,24 +148,18 @@ final class User extends Entity
 
     {
 
-        if (in_array("ROLE_ADMIN", $this->getUserRole())) {
-
-
+        if (in_array("ROLE_ADMIN", $this->getRole())) {
 
             return "admin";
         } else {
-
-
 
             return "user";
         }
     }
 
-
-
     /**
  
-     * Set the value of userRole
+     * Set the value of role
  
      *
  
@@ -194,43 +167,50 @@ final class User extends Entity
  
      */
 
-    public function setUserRole($role)
-
+    public function setRole($role)
     {
+        if ($role === null || trim($role) === '') {
 
-        // on récupère du JSON
+            // S'il est vide, vous pouvez attribuer un rôle par défaut
 
-        $this->userRole = json_decode($role);
+            $this->role = ["ROLE_USER"];
 
-        // S'il n'y a pas de rôles attitrés, on va lui attribué un rôle
+            // S'il n'y a pas de rôles attitrés, on va lui attribué un rôle
 
+        } else {
 
+            // on récupère du JSON
 
-        if (empty($this->$role)) {
+            // S'il contient une chaîne JSON valide, la décoder
 
-            $this->userRole[] = "ROLE_USER";
+            $this->role = json_decode($role);
+            // Vérifier si la décoding a échoué (probablement en raison d'une JSON invalide)
+
+            if ($this->role === null && json_last_error() !== JSON_ERROR_NONE) {
+
+                // Gérer l'erreur de décoding JSON ici si nécessaire
+            }
         }
         return $this;
     }
 
-    // public function hasRole($role)
+    public function hasRole($role)
 
-    // {
-    //     // si dans mon tableau JSON on trouve un rôle qui correspond au rôle en paramètre alors ça va nous return le rôle
-
-    //     return in_array($role, $this->getUserRole());
-    // }
-
-    /*    * Get the value of userRole   */
-    public function getUserRole()
     {
-        return $this->userRole;
+        // si dans mon tableau JSON on trouve un rôle qui correspond au rôle en paramètre alors ça va nous return le rôle
+        return $this->getRole();
+    }
+
+    /*    * Get the value of role   */
+    public function getRole()
+    {
+        return $this->role;
     }
 
     // Methode ToString
 
     public function __toString()
     {
-        return $this->getEmail() . $this->getEmail() . $this->getPassword() . $this->getDateInscription() . $this->getBan();
+        return $this->getEmail() . $this->getPseudo() . $this->getPassword() . $this->getDateInscription() . $this->getBan();
     }
 }

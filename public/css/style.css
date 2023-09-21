@@ -1,25 +1,36 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif
   }
-/******************HEADER **************************/
-#header{
+  #home-page{
+    margin: 0 auto;
+    width: 80%;
+  }
+  /******************HEADER **************************/
+  .header-category-user{
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     border: 1px solid black;
+    width: 100%;
     padding: 20px;
     background: linear-gradient(4deg, rgba(42,120,186,1) 0%, rgba(10,89,117,1) 60%, rgba(22,72,135,1) 100%);
-}
-#header a{
+  }
+.header-category-user a{
   text-decoration: none;
   color: white;
+}
+#nav-page{
+  display: flex;
+  flex-direction: column;
 }
 #nav-en-tete{
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  width: 100%;
   padding: 20px;
   background: linear-gradient(4deg, rgba(42,120,186,1) 0%, rgba(10,89,117,1) 60%, rgba(22,72,135,1) 100%);
 }
@@ -29,7 +40,7 @@
 }
 .nav-left{
   display: flex;
-    width: 30%;
+  width: 30%;
 }
 .nav-bar-connexion{
   width: 60%;
@@ -37,33 +48,63 @@
     flex-direction: column;
     align-items: end;
     font-size: 1.2em;
-}
-
-.header-nav-bar{
+  }
+  
+  .header-nav-bar{
     flex: 2;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
     font-size: 1.2em;
-}
-.img-header img{
+  }
+  .img-header img{
     width: 100%;
-}
+  }
+  .header-nav-right{
+    width: 100%;
+  }
+
+  /******************Home page ****************/
+  #home-page span{
+   text-align: center;
+  }
+  .home-img{
+    display: flex;
+      flex-direction: row;
+      text-align-last: center;
+      gap: 10px;
+      padding: 100px 0;
+  }
+  
+  .home-figure img{
+    object-fit: cover;
+      object-position: 50% 50%;
+      height: 100%;
+      width:70%;
+  }
+  .home-img-2{
+    display: flex;
+    flex-direction: row;
+    text-align-last: center;
+    gap: 10px;
+    padding: 0 0 100px 0;
+  }
+
  /***************************MAIN**************************/
  
 
  #forum{
-  min-height: 100vh;
-  display: flex;
+   min-height: 300vh;
+   display: flex;
     flex-direction: column;
     gap: 50px;
  }
  .parallax-contain img{
-  width: 100%;
- }
-.parallax{
-  background-image: url("./public/img/basket 1.jpg");
+   width: 100%;
+  }
+  .parallax{
+    background-image: url("./public/img/basket 1.jpg");
     min-height: 300px;
     background-attachment: fixed;
     background-position: center;
@@ -224,4 +265,27 @@ text-align: center;
       flex-direction: column;
       gap: 10px;
       align-items: center;
+}
+
+/************************** LOGIN  ****************************/
+
+.mdp-oublie{
+  text-align: center;
+}
+
+/******************** USER  ***********************/
+
+.header-nav-right{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.user-profil-items {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.user-profil-items p{
+  padding: 10px 0 10px 0 ;
 }

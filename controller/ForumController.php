@@ -97,10 +97,8 @@ class ForumController extends AbstractController implements ControllerInterface
         $nameCategory = filter_input(INPUT_POST, "nameCategory", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         $categoryManager = new CategoryManager();
-        // vars
-        $isAddCategorySuccess = false;
-        $globalMessage = "L'enregistrement a bien été effectué";
-        $formValues = null;
+
+
 
         // validation des règles du formulaire
         $isFormValid = true;
@@ -324,83 +322,12 @@ class ForumController extends AbstractController implements ControllerInterface
         $topicId = $_GET['topicId'];
         $this->redirectTo("forum", "findPostByTopicId", $topicId);
     }
+    public function deleteTopic($id)
+    {
+
+        $topicManager = new TopicManager();
+        $topicManager->delete($id);
+        $categoryId = $_GET['categoryId'];
+        $this->redirectTo("forum", "findTopicByCategoryId", $categoryId);
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//     // fonction pour mettre à jour les categories 
-//     public static function updateCategoryForm()
-//     {
-//         return [
-//             "view" => VIEW_DIR . "forum/updateCategoryForm.php",
-//         ];
-//     }
-
-//     // Verification de la fonction pour mettre à jour les categories 
-//     public static function updateCategory()
-//     {
-//         // filtrer ce qui arrive en POST
-//         // "nameCategory" : vient du name="nameCategory" du fichier addcategoryForm.php
-//         $nameCategory = filter_input(INPUT_POST, "nameCategory", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-//         $categoryManager = new CategoryManager();
-//         // vars
-//         $isActionSuccess = false;
-
-//         $globalMessage = "L'enregistrement a bien été effectué";
-
-//         $formValues = null;
-
-//         // validation des règles du formulaire
-//         $isFormValid = true;
-
-//         $errorMessages = [];
-
-//         // label est obligatoire
-//         // si label est vide
-//         if ($nameCategory == "") {
-
-//             $isFormValid = false;
-
-//             $errorMessages["nameCateogry"] = "Ce champ est obligatoire";
-//         }
-
-//         // nameCateogry ne doit pas dépasser 30 caractères
-//         if (strlen($nameCategory) > 30) {
-
-//             $isFormValid = false;
-
-//             $errorMessages["nameCateogry"] = "Ce champ est limité à 30 caractères";
-//         }
-//         // si les règles de validation du formulaire sont respectées
-//         if ($isFormValid) {
-
-//             // (id_category, category)
-//             $categoryManager->generate(["nameCategory" => $nameCategory]);
-
-//             $this->redirectTo("forum", "listCategories");
-
-//             // var_dump($error); // $error["errorInfo"][2]
-//             // die();
-//         } else {
-//             // le formulaire est invalide
-//             $isActionSuccess = false;
-
-//             $globalMessage = "Le formulaire est invalide";
-//         }
-//     }
-// }

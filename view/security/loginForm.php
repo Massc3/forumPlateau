@@ -26,7 +26,11 @@
         <input type="password" name="password" id="password" required=true>
 
     </div>
+    <div class="mdp-oublie">
+        <a href="index.php?ctrl=security&action=updatePasswordForm">mot de passe oublié?</a>
+    </div>
 
+    <!-- soumettre la demande du formulaire -->
     <button type="submit">Connexion</button>
 
     <footer class="d-flex flex-column justify-content-center gap-2">
